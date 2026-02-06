@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../domain/models/film_detail_model.dart';
 import '../../data/api/film_api.dart';
 import '../../data/repository/film_repository.dart';
-import '../controller/film_controller.dart';
 
 class FilmDetailScreen extends StatelessWidget {
   final String filmUrl;
@@ -12,8 +11,7 @@ class FilmDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final filmApi = FilmApi();
-    final filmRepository = FilmRepository(filmApi);
-    final filmController = FilmController(filmRepository);
+    final filmRepository = FilmRepository(filmApi: filmApi);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -30,7 +28,7 @@ class FilmDetailScreen extends StatelessWidget {
         ),
       ),
       body: FutureBuilder<FilmDetail>(
-        future: filmController.getFilmDetail(filmUrl),
+        future: filmRepository.getFilmDetail(filmUrl),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -80,9 +78,9 @@ class FilmDetailScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       'Description:',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.yellow,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

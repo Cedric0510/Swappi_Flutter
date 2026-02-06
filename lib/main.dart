@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:http/http.dart' as http;
-import 'presentation/ui/film_screen.dart';
+import 'presentation/views/film_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,9 +16,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ==========================================
-// ETAPE 4 : CODE SANS CLEAN ARCHITECTURE
-// ==========================================
 // class HomePage extends StatefulWidget {
 //   const HomePage({super.key});
 //
